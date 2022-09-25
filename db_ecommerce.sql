@@ -734,4 +734,16 @@ SELECT `frete`.`valor_frete`
 	FROM `frete` 
 INNER JOIN `endereco` ON `frete`.`cep_inicial`<= `endereco`.`cep` AND `frete`.`cep_final`>= `endereco`.`cep` 
 INNER JOIN `cliente_endereco` ON `cliente_endereco`.`cliente_endereco_id_endereco`=`endereco`.`id_endereco`
-WHERE `cliente_endereco`.`cliente_endereco_id_cliente`=1
+WHERE `cliente_endereco`.`cliente_endereco_id_cliente`=1;
+
+-- retorna o nome do produto, o valor do produto e o nome do fornecedor, onde o valor do produto é maior ou igual a $200
+SELECT produto.nome AS 'Nome do Produto', produto.valor AS 'Valor do Produto', fornecedor.razao_social AS 'Fornecedor'
+	FROM produto
+    INNER JOIN fornecedor
+WHERE id_fornecedor=produto.produto_id_fornecedor HAVING produto.valor>=200;
+
+-- retorna o nome do cliente, o número do documento e o e-mail, ordenado alfabeticamente pelo nome do cliente
+SELECT * FROM cliente;
+SELECT cliente.nome_completo AS 'Nome Cliente', cliente.cnpj_cpf AS 'Documento', cliente.email AS 'E-mail'
+	FROM cliente
+ORDER BY cliente.nome_completo;
